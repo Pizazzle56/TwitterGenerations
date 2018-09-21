@@ -70,8 +70,10 @@ public class TwitterVis extends PApplet {
 			
 		FollowerCircle firstGen = new FollowerCircle(fImage, width/2, height/2, circleRadius);
 		firstGen.draw(this);
-		
-		
+
+		textSize(12);
+		text("Twitter Generations v0.1b",0,12);
+		text("Created by Pizazzle56", width/2 - 32, height-12);
 	}
 	
 	
