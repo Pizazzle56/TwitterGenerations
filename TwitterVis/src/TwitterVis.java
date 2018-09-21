@@ -25,7 +25,7 @@ public class TwitterVis extends PApplet {
 	public static void main(String[] args) {
 		PApplet.main("TwitterVis");
 		
-		
+
 	}
 	
 	public void settings() {
@@ -44,30 +44,12 @@ public class TwitterVis extends PApplet {
 		cb.setOAuthAccessToken("2239613238-wrVMW49XcaWBZTxu2oMn3txSRBDJsKUKqSi8znB");
 		cb.setOAuthAccessTokenSecret("SEJva2Ai8nhWgsnxTt3w85QPYy0wsL7GEs8aRQ09ByhoA");
 		twitter = new TwitterFactory(cb.build()).getInstance();
-		
-		//try {
-			//originalUser = twitter.showUser("DepressedLinux");
-		//} catch (TwitterException e) {
-			//e.printStackTrace();
-		//}
-		
-		//try {
-			//PagableResponseList<User> statuse = twitter.getFollowersList(originalUser.getName(), -1);
-				//for (User follower : statuse) {
-					//	System.out.println(follower.get400x400ProfileImageURL());
-					//	fImage.add(new FollowerImage(loadImage(follower.get400x400ProfileImageURL())));
-					//	followers.add(follower);
-					//	time = millis();					
-			    //}
-		//} catch(TwitterException te) {
-			//System.out.println("Couldn't connect.");
-			//te.printStackTrace();
-		//}
 	}
 	
 	public void draw() {
-		background(millis()/100,millis()/100,millis()/100);
-			
+		background(millis()/300,millis()/300,millis()/300);
+
+
 		FollowerCircle firstGen = new FollowerCircle(fImage, width/2, height/2, circleRadius);
 		firstGen.draw(this);
 

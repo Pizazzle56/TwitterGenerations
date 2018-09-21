@@ -21,8 +21,8 @@ public class FollowerCircle {
 		for(int i = 0; i < fImage.size(); i++) {
 			fImage.get(i).getImage().resize(parentApplet.width/fImage.size(), parentApplet.width/fImage.size());
 			double circleChunk =((360 / fImage.size()) / (180 / Math.PI));
-			fImage.get(i).setxPos(parentApplet.width/2 + parentApplet.cos((float) (circleChunk * i)+ parentApplet.millis() / 200)*circleRadius);
-			fImage.get(i).setyPos(parentApplet.height/2 + parentApplet.sin((float) circleChunk * i + parentApplet.millis() / 200)*circleRadius);
+			fImage.get(i).setxPos(parentApplet.width/2 + parentApplet.cos((float) (circleChunk * i)+ ((float) .001 * parentApplet.millis()))*circleRadius);
+			fImage.get(i).setyPos(parentApplet.height/2 + parentApplet.sin((float) circleChunk * i + ((float) .001 * parentApplet.millis()))*circleRadius);
 
 			parentApplet.image(fImage.get(i).getImage(), fImage.get(i).getxPos(), fImage.get(i).getyPos());
 		}
