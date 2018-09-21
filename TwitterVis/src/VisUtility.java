@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import twitter4j.PagableResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -25,17 +26,32 @@ public class VisUtility {
 		
 	}
 	
+	public PImage getUserImage(String userName) {
+		User user = null;
+		PImage userImage = null;
+		try {
+			user = twitter.showUser(userName);
+		} catch (TwitterException e) {
+			System.out.println("Something went wrong getting the user or there was a rate limit hit.");
+		}
+		if(user !=null) {
+			userImage = parentApplet.loadImage(user.get400x400ProfileImageURL());
+			userImage.resize(500/8,  500/8);
+		} else {
+			System.out.println("User not found");
+		}
+		return userImage;
+	}
 	public ArrayList<FollowerImage> loadFollowers(String originalUser) {
 		ArrayList<FollowerImage> fImage = new ArrayList<FollowerImage>();
 		
 		try {
 			PagableResponseList<User> statuse = twitter.getFollowersList(originalUser, -1);
 				for (User follower : statuse) {
-						System.out.println(follower.get400x400ProfileImageURL());
 						fImage.add(new FollowerImage(parentApplet.loadImage(follower.get400x400ProfileImageURL())));
 			    }
 		} catch(TwitterException te) {
-			System.out.println("Couldn't connect.");
+			System.out.println("Probably just hit the rate limit");
 			te.printStackTrace();
 		}
 		

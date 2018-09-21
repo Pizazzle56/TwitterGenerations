@@ -10,11 +10,8 @@ import twitter4j.User;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterVis extends PApplet {
-	ConfigurationBuilder cb;
-	Twitter twitter;
-	ArrayList<User> followers;
-	ArrayList<FollowerImage> fImage;
-	User originalUser;
+		
+	FollowerCircle firstGen;
 	
 	VisUtility visUtility;
 	
@@ -24,7 +21,6 @@ public class TwitterVis extends PApplet {
 	int circleRadius = 150;
 	public static void main(String[] args) {
 		PApplet.main("TwitterVis");
-		
 
 	}
 	
@@ -33,26 +29,20 @@ public class TwitterVis extends PApplet {
 	}
 	
 	public void setup() {
+		surface.setResizable(true);
+		
 		visUtility = new VisUtility(this);
 		
-		time = millis();
-		followers = new ArrayList<User>();
-		fImage = visUtility.loadFollowers("DepressedLinux");
-		cb = new ConfigurationBuilder();
-		cb.setOAuthConsumerKey("POhVTI0HbMy0AyjWfkXTDUnQa");
-		cb.setOAuthConsumerSecret("Vkziw0BVwZLZ6uRCdXHf90yDgoNChabsEPzjv6HMIttd35SpTv");
-		cb.setOAuthAccessToken("2239613238-wrVMW49XcaWBZTxu2oMn3txSRBDJsKUKqSi8znB");
-		cb.setOAuthAccessTokenSecret("SEJva2Ai8nhWgsnxTt3w85QPYy0wsL7GEs8aRQ09ByhoA");
-		twitter = new TwitterFactory(cb.build()).getInstance();
+		
+		firstGen = new FollowerCircle(visUtility.loadFollowers("DepressedLinux"), 320, 240, circleRadius);
 	}
-	
 	public void draw() {
-		background(millis()/300,millis()/300,millis()/300);
+		background(0,0,0);
 
-
-		FollowerCircle firstGen = new FollowerCircle(fImage, width/2, height/2, circleRadius);
 		firstGen.draw(this);
-
+		
+		image(visUtility.getUserImage("DepressedLinux"), width/2, height/2);
+		
 		textSize(12);
 		text("Twitter Generations v0.1b",0,12);
 		text("Created by Pizazzle56", width/2 - 32, height-12);
